@@ -10,7 +10,7 @@ If you have access to this repo you probably also have access to [slackscribe re
 3. `yarn start`
 
 ## Making your own app
-# Working With The Slack Scribe API
+### Working With The Slack Scribe API
 
 http://slackscribe.herokuapp.com/claim.html
 
@@ -26,20 +26,23 @@ To get your JWT token, use the following endpoint
 // you will want to do this on your server
 POST https://slackscribe/api/auth/login
 with the body
+`
 {
 	email: <YOUR-EMAIL-ADDRESS>
 	password: <YOUR-PASSWORD>
 }
+`
 
 if your credentials are incorrect or you haven't been validated by me yet, you'll recieve a 401
 
 if your credentials are correct and you've been validated, you should recieve a 200 status code
 and the following response
-
+`
 {
 	success: true,
 	token: "JWT <your-access-token-here"
 }
+`
 
 You will use your access token for any subsequent requests, trying to use your email/password combo will not work
 
@@ -53,11 +56,14 @@ https://slackscribe/api/events?start=1550653750273&end=1550740150274
 Note: you can have one without the other
 
 You will need to pass the following headers along with the request
+`
 {
 	Authorization: "Bearer <your-bearer-auth-token>"
 }
+`
 
 You will get back data in the following format
+`
 {
 	ts: { type: Number },			// The timestamp in unix time of the event
 	  user: { type: String },		// the coded string of the user
@@ -70,5 +76,6 @@ You will get back data in the following format
 	  channel: { type: String },	// the coded string of the channel it appeared in
 	  eventType: { type: String }	// the type of event
 }
+`
 
 Using this information for example, you could determine all the links that came from stack overflow that were shared during the week, or when each of the panopto videos was posted etc
