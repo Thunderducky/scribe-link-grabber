@@ -57,7 +57,7 @@ You will need to pass the following headers along with the request
 `
 
 You will get back data in the following format   
-`
+```
 {
 	ts: { type: Number },			// The timestamp in unix time of the event  
 	  user: { type: String },		// the coded string of the user  
@@ -70,6 +70,6 @@ You will get back data in the following format
 	  channel: { type: String },	// the coded string of the channel it appeared in  
 	  eventType: { type: String }	// the type of event  
 }
-`
+```
 
 Using this information for example, you could determine all the links that came from stack overflow that were shared during the week, or when each of the panopto videos was posted etc.
