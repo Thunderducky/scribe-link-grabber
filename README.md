@@ -11,11 +11,13 @@ If you have access to this repo you probably also have access to [slackscribe re
 
 ## Making your own app
 ### Working With The Slack Scribe API
+To work with the Slack Scribe API you must have an invite code, you can ask me for one if you are interested
 
-http://slackscribe.herokuapp.com/claim.html
+*Once you have your code you can claim it at `http://slackscribe.herokuapp.com/claim.html` *
+
 
 Claim your account with your username and code and select a unique password
-YOU WON'T BE ABLE TO RESET IT YET
+*NOTE: YOU WON'T BE ABLE TO RESET YOUR PASSWORD AT THIS TIME*
 
 This username and password will be how you can get your JWT_TOKEN
 these tokens expire every 23 hours, so if you want to request new ones, you'll have to do that
