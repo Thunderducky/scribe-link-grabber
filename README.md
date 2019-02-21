@@ -59,16 +59,16 @@ You will need to pass the following headers along with the request
 You will get back data in the following format   
 `
 {
-	ts: { type: Number },			// The timestamp in unix time of the event
-	  user: { type: String },		// the coded string of the user
-	  text: { type: String },		// the text associated with the event
-	  links: [{						// any links associated with the event
-	    url: { type:String} ,		// the raw url
-	    domain: { type:String },	// the top level domain associated with it
-	    label: {type: String }		// the label it may have been given
-	  }],
-	  channel: { type: String },	// the coded string of the channel it appeared in
-	  eventType: { type: String }	// the type of event
+	ts: { type: Number },			// The timestamp in unix time of the event  
+	  user: { type: String },		// the coded string of the user  
+	  text: { type: String },		// the text associated with the event  
+	  links: [{						// any links associated with the event  
+	    url: { type:String} ,		// the raw url  
+	    domain: { type:String },	// the top level domain associated with it  
+	    label: {type: String }		// the label it may have been given  
+	  }],  
+	  channel: { type: String },	// the coded string of the channel it appeared in  
+	  eventType: { type: String }	// the type of event  
 }
 `
 
