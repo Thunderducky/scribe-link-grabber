@@ -23,8 +23,8 @@ This username and password will be how you can get your JWT_TOKEN. These tokens 
 
 To get your JWT token, use the following endpoint
 
-`POST https://slackscribe/api/auth/login`
-with the body
+`POST https://slackscribe/api/auth/login`  
+with the body  
 `
 {
 	email: <YOUR-EMAIL-ADDRESS>
@@ -32,10 +32,8 @@ with the body
 }
 `
 
-if your credentials are incorrect or you haven't been validated by me yet, you'll recieve a 401
-
-if your credentials are correct and you've been validated, you should recieve a 200 status code
-and the following response
+If your credentials are incorrect or you haven't been validated by me yet, you'll recieve a 401.  
+If your credentials are correct and you've been validated, you should recieve a 200 status code and the following response:  
 `
 {
 	success: true,
@@ -43,15 +41,14 @@ and the following response
 }
 `
 
-You will use your access token for any subsequent requests, trying to use your email/password combo will not work
+You will use your access token for any subsequent requests, trying to use your email/password combo will not work  
+We currently only have one endpoint to use for retrieving recorded slack events  
 
-We currently only have one endpoint to use for retrieving recorded slack events
-
-https://slackscribe/api/events
+`https://slackscribe.herokuapp.com/api/events`
 
 Optionally you may include start and end query markers that use unix time
-https://slackscribe/api/events?start=1550653750273&end=1550740150274
-(look for events betwen February 20th around 3AM and February 21st around 3AM)
+`https://slackscribe/api/events?start=1550653750273&end=1550740150274`  
+*look for events betwen February 20th around 3AM and February 21st around 3AM)*
 Note: you can have one without the other
 
 You will need to pass the following headers along with the request
