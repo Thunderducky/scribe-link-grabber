@@ -11,7 +11,7 @@ This is an example consumer app of the `slackscribe` system
 ### Working With The Slack Scribe API
 To work with the Slack Scribe API you must have an invite code, you can ask me for one if you are interested
 
-##### Once you have your code you can claim it at `http://slackscribe.herokuapp.com/claim.html` *
+##### Once you have your code you can claim it at `http://slackscribe.herokuapp.com/claim.html`
 
 
 Claim your account with your username and code and select a unique password  
@@ -44,19 +44,19 @@ We currently only have one endpoint to use for retrieving recorded slack events
 
 `https://slackscribe.herokuapp.com/api/events`
 
-Optionally you may include start and end query markers that use unix time
+Optionally you may include start and end query markers that use unix time  
 `https://slackscribe/api/events?start=1550653750273&end=1550740150274`  
-*look for events betwen February 20th around 3AM and February 21st around 3AM)*
+*look for events betwen February 20th around 3AM and February 21st around 3AM)*  
 Note: you can have one without the other
-
-You will need to pass the following headers along with the request
+  
+You will need to pass the following headers along with the request  
 `
 {
 	Authorization: "Bearer <your-bearer-auth-token>"
 }
 `
 
-You will get back data in the following format
+You will get back data in the following format   
 `
 {
 	ts: { type: Number },			// The timestamp in unix time of the event
@@ -72,4 +72,4 @@ You will get back data in the following format
 }
 `
 
-Using this information for example, you could determine all the links that came from stack overflow that were shared during the week, or when each of the panopto videos was posted etc
+Using this information for example, you could determine all the links that came from stack overflow that were shared during the week, or when each of the panopto videos was posted etc.
