@@ -97,7 +97,11 @@ app.get("/api/activties", (req,res)=>{
 				obj.activites = [];
 				data.push(obj);
 			}else if(data[data.length-1] && t.links.length > 0 && t.links[0].url.match(/https?:\/\/github.com\/the-coding-boot-camp-at-ut\/[\w-\d.]+\/blob\/master\/01-class-content/gi)){
-				obj.day = moment(moment(t.ts,"X").diff(moment(data[data.length-1].ts,"X"))).format("ss");
+				obj.tsOnPanopto = moment(moment(t.ts,"X").diff(moment(data[data.length-1].ts,"X"))).format("ss");
+				const regex = /https?:\/\/github.com\/the-coding-boot-camp-at-ut\/[\w-\d.]+\/blob\/master\/01-class-content\/([\w-\d]+)\/01-activities\/([\w-\d]+)\/readme\.md/gi
+				let regexArr = regex.exec(t.links[0].url)
+				obj.unit = regexArr[1];
+				obj.activityName = regexArr[2];
 				obj.ts = t.ts;
 				obj.link = t.links[0].url;
 				data[data.length-1].activites.push(obj)
