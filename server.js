@@ -27,10 +27,13 @@ app.get("/api/events", (req, res) => {
   // TODO: Copy query string
   const url = `${BASE_URL}/api/events`;
   access.get(url).then(
-    result => res.json(result.data.map(t => {
-      t.ts = moment(t.ts, "X").format("MM-DD-YY HH:mm:ss");
-      return t;
-    }))
+    result => { 
+		console.log(result.data);
+		return res.json(result.data.map(t => {
+      		t.ts = moment(t.ts, "X").format("MM-DD-YY HH:mm:ss");
+      		return t;
+		})) 
+	}
   ).catch(
     err => res.status(500).send(err)
   );
@@ -48,7 +51,7 @@ app.get("/api/links", (req, res) => {
         })
       })
       let links = result.data.reduce((_links, t) => _links.concat(t.links) , [])
-      links = links.filter(l => l.domain == "https://codingbootcamp.hosted.panopto.com")
+	  links = links.filter(l => l.domain == "https://codingbootcamp.hosted.panopto.com")
       res.json(links)
     }
   ).catch(
@@ -75,6 +78,37 @@ app.get("/api/readme", (req, res) => {
     err => res.status(500).send(err)
   );
 });
+
+app.get("/api/activties", (req,res)=>{
+  // try getting piece,
+  const url = `${BASE_URL}/api/events`;
+  access.get(url).then(
+    result => {
+		const last = result.data.slice(result.data.length-20,result.data.length+1);
+		let data = [];
+		// console.log(last);
+		last.forEach((t)=> {
+			let obj = {}
+			console.log(t);
+			if(t.links.length > 0 && t.links[0].domain === "https://codingbootcamp.hosted.panopto.com"){
+				obj.day = moment(t.ts, "X").format("MM-DD-YY HH:mm:ss");
+				obj.ts = t.ts;
+				obj.link = t.links[0].url;
+				obj.activites = [];
+				data.push(obj);
+			}else if(t.links.length > 0 && t.links[0].domain === "https://github.com"){
+				obj.day = moment(t.ts, "X").format("MM-DD-YY HH:mm:ss");
+				obj.ts = t.ts;
+				obj.link = t.links[0].url;
+				data[data.length-1].activites.push(obj)
+			}
+		})
+    	res.json(data);
+    }
+  ).catch(
+    err => res.status(500).send(err)
+  );
+})
 
 app.listen(PORT, () => {
   console.log(chalk.bgBlue(`Server starting on ${PORT}`));
