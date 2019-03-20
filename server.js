@@ -96,13 +96,11 @@ app.get("/api/activties", (req,res)=>{
 				obj.link = t.links[0].url;
 				obj.activites = [];
 				data.push(obj);
-			}else if(t.links.length > 0 && t.links[0].url.match(/https?:\/\/[\w-\d.]+\/the-coding-boot-camp-at-ut\//gi)){
-				obj.day = moment(t.ts, "X").format("MM-DD-YY HH:mm:ss");
+			}else if(data[data.length-1] && t.links.length > 0 && t.links[0].url.match(/https?:\/\/github.com\/the-coding-boot-camp-at-ut\/[\w-\d.]+\/blob\/master\/01-class-content/gi)){
+				obj.day = moment(moment(t.ts,"X").diff(moment(data[data.length-1].ts,"X"))).format("ss");
 				obj.ts = t.ts;
 				obj.link = t.links[0].url;
-				if(data[data.length-1]){
-					data[data.length-1].activites.push(obj)
-				}
+				data[data.length-1].activites.push(obj)
 			}
 		})
     	res.json(data);
