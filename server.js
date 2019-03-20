@@ -87,7 +87,7 @@ app.get("/api/activties", (req,res)=>{
 		const last = result.data.slice(result.data.length-20,result.data.length+1);
 		let data = [];
 		// console.log(last);
-		last.forEach((t)=> {
+		result.data.forEach((t)=> {
 			let obj = {}
 			console.log(t);
 			if(t.links.length > 0 && t.links[0].domain === "https://codingbootcamp.hosted.panopto.com"){
@@ -96,11 +96,13 @@ app.get("/api/activties", (req,res)=>{
 				obj.link = t.links[0].url;
 				obj.activites = [];
 				data.push(obj);
-			}else if(t.links.length > 0 && t.links[0].domain === "https://github.com"){
+			}else if(t.links.length > 0 && t.links[0].url.match(/https?:\/\/[\w-\d.]+\/the-coding-boot-camp-at-ut\//gi)){
 				obj.day = moment(t.ts, "X").format("MM-DD-YY HH:mm:ss");
 				obj.ts = t.ts;
 				obj.link = t.links[0].url;
-				data[data.length-1].activites.push(obj)
+				if(data[data.length-1]){
+					data[data.length-1].activites.push(obj)
+				}
 			}
 		})
     	res.json(data);
