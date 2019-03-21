@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const moment = require("moment");
 const dotenv = require("dotenv");
 const chalk = require("chalk");
+const path = require("path");
 
 const access = require("./access");
 
@@ -80,7 +81,7 @@ app.get("/api/readme", (req, res) => {
   );
 });
 
-app.get("/api/activties", (req,res)=>{
+app.get("/api/activities", (req,res)=>{
   // try getting piece,
   const url = `${BASE_URL}/api/events`;
   access.get(url).then(
@@ -98,7 +99,7 @@ app.get("/api/activties", (req,res)=>{
 				obj.activites = [];
 				data.push(obj);
 			}else if(data[data.length-1] && t.links.length > 0 && t.links[0].url.match(/https?:\/\/github.com\/the-coding-boot-camp-at-ut\/[\w-\d.]+\/blob\/master\/01-class-content/gi)){
-				obj.tsOnPanopto = moment(moment(t.ts,"X").diff(moment(data[data.length-1].ts,"X"))).format("ss");
+				obj.tsOnPanopto = +moment(moment(t.ts,"X").diff(moment(data[data.length-1].ts,"X"))).format("ss");
 				const regex = /https?:\/\/github.com\/the-coding-boot-camp-at-ut\/[\w-\d.]+\/blob\/master\/01-class-content\/([\w-\d]+)\/01-activities\/([\w-\d]+)\/readme\.md/gi
 				let regexArr = regex.exec(t.links[0].url)
 				obj.unit = regexArr[1];
