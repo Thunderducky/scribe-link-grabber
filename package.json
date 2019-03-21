@@ -1,10 +1,16 @@
 {
   "name": "bot-test",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js"
+    "start": "per-env",
+    "start:development": "concurrently \"nodemon --ignore client/\" \"npm run client\"",
+    "start:production": "node server.js",
+    "client": "cd client && npm run start",
+    "install": "cd client && yarn install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -13,6 +19,12 @@
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "markdown": "^0.5.0",
-    "moment": "^2.22.2"
+	"moment": "^2.22.2",
+	"per-env": "^1.0.2",
+    "react-materialize": "^2.6.0"
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1",
+    "nodemon": "^1.18.4"
   }
 }

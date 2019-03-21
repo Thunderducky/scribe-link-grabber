@@ -6,7 +6,7 @@ const chalk = require("chalk");
 
 const access = require("./access");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const BASE_URL = process.env.DATA_HOST_URL
 
 const app = express();
@@ -19,8 +19,9 @@ const processLinks = links => {
   }).join('')}`
 };
 
-app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
+app.use(express.static("client/build"));
 
 app.get("/api/events", (req, res) => {
   // try getting piece,
@@ -113,6 +114,10 @@ app.get("/api/activties", (req,res)=>{
     err => res.status(500).send(err)
   );
 })
+
+app.use("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "./client/build/index.html"))
+  })
 
 app.listen(PORT, () => {
   console.log(chalk.bgBlue(`Server starting on ${PORT}`));
