@@ -90,7 +90,7 @@ app.get("/api/activities", (req,res)=>{
 		result.data.forEach((t)=> {
 			let obj = {}
 			if(t.links.length > 0 && t.links[0].domain === "https://codingbootcamp.hosted.panopto.com"){
-				obj.day = moment(t.ts, "X").format("MM-DD-YY HH:mm:ss");
+				obj.day = moment(t.ts, "X").format("LLLL");
 				obj.ts = t.ts;
 				obj.link = t.links[0].url;
 				obj.activites = [];

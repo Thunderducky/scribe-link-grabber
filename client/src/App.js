@@ -102,7 +102,7 @@ class App extends Component {
 		return (
 		<div className="container">
 			{activityDiv}
-			<div style={{display:"flex",marginBottom:"10px"}}>
+			<div style={{display:"flex",flexWrap:"wrap",marginBottom:"10px"}}>
 				{this.state.urls.map((panopto,index)=>{return(
 					<PanoptoButton
 					key={index}
