@@ -86,12 +86,9 @@ app.get("/api/activities", (req,res)=>{
   const url = `${BASE_URL}/api/events`;
   access.get(url).then(
     result => {
-		const last = result.data.slice(result.data.length-20,result.data.length+1);
 		let data = [];
-		// console.log(last);
 		result.data.forEach((t)=> {
 			let obj = {}
-			console.log(t);
 			if(t.links.length > 0 && t.links[0].domain === "https://codingbootcamp.hosted.panopto.com"){
 				obj.day = moment(t.ts, "X").format("MM-DD-YY HH:mm:ss");
 				obj.ts = t.ts;
