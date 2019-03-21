@@ -78,11 +78,10 @@ class App extends Component {
 	let activityDiv;
 	if(this.state.currentPanopto){
 		activityDiv = (
-		<div className="App">
-			<div style={{display:"flex", flexWrap: "wrap"}}>
+		<div className="App" style={{margin:"10px"}}>
 			<Viewer url={this.state.currentPanopto.link} start={this.state.jumpTime}/>
-			<div id="mycollection">
-				<ul className="collection">
+			<div id="mycollection" className="row">
+				<ul className="collection col s12">
 				{this.state.currentPanopto.activites.map((activity,index)=>{return(
 					<LineItem
 						title={`${activity.unit} : ${activity.activityName}`}
@@ -95,16 +94,15 @@ class App extends Component {
 				)})}
 				</ul>
 			</div>
-			</div>
 		</div>)
 	}else{
 		activityDiv
 	}
 	if(this.state.urls.length>0){
 		return (
-		<div>
+		<div className="container">
 			{activityDiv}
-			<div style={{display:"flex"}}>
+			<div style={{display:"flex",marginBottom:"10px"}}>
 				{this.state.urls.map((panopto,index)=>{return(
 					<PanoptoButton
 					key={index}
