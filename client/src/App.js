@@ -15,34 +15,6 @@ class App extends Component {
 	  currentPanopto: null
     };
   }
-//   {
-// 	"day": "03-20-19 10:40:25",
-// 	"ts": 1553096425.0004,
-// 	"link": "https://codingbootcamp.hosted.panopto.com/panopto/pages/viewer.aspx?id=a5ea0c8a-b006-4d2b-b819-aa0901061c02",
-// 	"activites": [
-// 		{
-// 			"tsOnPanopto": 14,
-// 			"unit": "05-timers",
-// 			"activityName": "04-coinflip",
-// 			"ts": 1553096439.0007,
-// 			"link": "https://github.com/the-coding-boot-camp-at-ut/utaus201902fsf3-ft/blob/master/01-class-content/05-timers/01-activities/04-coinflip/readme.md"
-// 		},
-// 		{
-// 			"tsOnPanopto": 22,
-// 			"unit": "05-timers",
-// 			"activityName": "08-simpletimer",
-// 			"ts": 1553096447.0009,
-// 			"link": "https://github.com/the-coding-boot-camp-at-ut/utaus201902fsf3-ft/blob/master/01-class-content/05-timers/01-activities/08-simpletimer/readme.md"
-// 		},
-// 		{
-// 			"tsOnPanopto": 30,
-// 			"unit": "05-timers",
-// 			"activityName": "09-interval",
-// 			"ts": 1553096455.0011,
-// 			"link": "https://github.com/the-coding-boot-camp-at-ut/utaus201902fsf3-ft/blob/master/01-class-content/05-timers/01-activities/09-interval/readme.md"
-// 		}
-// 	]
-// },
   setJumpTime(time){
     this.setState({jumpTime: time});
   }
@@ -69,7 +41,6 @@ class App extends Component {
   componentDidMount(){
 	  axios.get("/api/activities").then((activity)=>{
 		this.setState({urls:activity.data});
-		console.log(this.state);
 	  }).catch(
 		err => {throw err}
 	  );
@@ -95,8 +66,6 @@ class App extends Component {
 				</ul>
 			</div>
 		</div>)
-	}else{
-		activityDiv
 	}
 	if(this.state.urls.length>0){
 		return (
