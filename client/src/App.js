@@ -21,23 +21,16 @@ class App extends Component {
   displayPanopto(currentPanoptoIndex){
 	  this.setState({currentPanopto:this.state.urls[currentPanoptoIndex]});
   }
-  timeConverter(t) {
-	var minutes = Math.floor(t / 60);
-	var seconds = t - (minutes * 60);
   
-	if (seconds < 10) {
-	  seconds = "0" + seconds;
-	}
-  
-	if (minutes === 0) {
-	  minutes = "00";
-	}
-	else if (minutes < 10) {
-	  minutes = "0" + minutes;
-	}
-  
-	return minutes + ":" + seconds;
-  }
+ secondsToHms(d) {
+    d = Number(d);
+
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+
+    return ("0" + h).slice(-2) + ":" + ("0" + m).slice(-2) + ":" + ("0" + s).slice(-2);
+}
   componentDidMount(){
 	  axios.get("/api/activities").then((activity)=>{
 		this.setState({urls:activity.data});
@@ -56,7 +49,7 @@ class App extends Component {
 				{this.state.currentPanopto.activites.map((activity,index)=>{return(
 					<LineItem
 						title={`${activity.unit} : ${activity.activityName}`}
-						startTime={this.timeConverter(activity.tsOnPanopto)}
+						startTime={this.secondsToHms(activity.tsOnPanopto)}
 						click={()=>this.setJumpTime(activity.tsOnPanopto)}
 						key={index}
 					>
