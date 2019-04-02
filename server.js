@@ -1,7 +1,6 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const moment = require("moment")
-// const dotenv = require("dotenv")
 const chalk = require("chalk")
 const path = require("path")
 
