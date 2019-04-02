@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import {Viewer} from "./components/Viewer";
-import {LineItem} from "./components/LineItem";
 import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
 import {PanoptoButton} from "./components/PanoptoButton";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import {ActivityDiv} from "./components/ActivityDiv"
 
 class App extends Component {
   constructor(){
@@ -63,23 +63,13 @@ class App extends Component {
 	let activityDiv;
 	if(this.state.currentPanopto){
 		activityDiv = (
-		<div className="App" style={{margin:"10px"}}>
-			<Viewer url={this.state.currentPanopto.link} start={this.state.jumpTime}/>
-			<div id="mycollection" className="row">
-				<ul className="collection col s12">
-				{this.state.currentPanopto.activites.map((activity,index)=>{return(
-					<LineItem
-						title={`${activity.unit} : ${activity.activityName}`}
-						startTime={this.secondsToHms(activity.tsOnPanopto)}
-						click={()=>this.setJumpTime(activity.tsOnPanopto)}
-						key={index}
-					>
-						<a rel="noopener noreferrer" target="_blank" href={activity.link}>Activity Readme</a>
-					</LineItem>
-				)})}
-				</ul>
-			</div>
-		</div>)
+			<ActivityDiv 
+			currentPanopto={this.state.currentPanopto}
+			jumpTime = {this.state.jumpTime}
+			secondsToHms = {this.secondsToHms}
+			setJumpTime = {(time) => this.setJumpTime(time)}
+			></ActivityDiv>
+		)
 	}
 	if(this.state.urls.length>0){
 		return (
