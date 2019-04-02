@@ -1,7 +1,7 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const moment = require("moment")
-const dotenv = require("dotenv")
+// const dotenv = require("dotenv")
 const chalk = require("chalk")
 const path = require("path")
 
@@ -29,11 +29,11 @@ app.get("/api/events", (req, res) => {
     // TODO: Copy query string
     const url = `${BASE_URL}/api/events`
     access.get(url).then(
-        result => { 
+        result => {
             return res.json(result.data.map(t => {
-      		t.ts = moment(t.ts, "X").format("MM-DD-YY HH:mm:ss")
-      		return t
-            })) 
+                t.ts = moment(t.ts, "X").format("MM-DD-YY HH:mm:ss")
+                return t
+            }))
         }
     ).catch(
         err => res.status(500).send(err)
@@ -52,7 +52,7 @@ app.get("/api/links", (req, res) => {
                 })
             })
             let links = result.data.reduce((_links, t) => _links.concat(t.links) , [])
-	  links = links.filter(l => l.domain == "https://codingbootcamp.hosted.panopto.com")
+            links = links.filter(l => l.domain == "https://codingbootcamp.hosted.panopto.com")
             res.json(links)
         }
     ).catch(
@@ -123,7 +123,7 @@ app.get("/api/activities", (req,res)=>{
                     }
                 }
             })
-    	res.json(data)
+            res.json(data)
         }
     ).catch(
         (err) => {
@@ -137,5 +137,5 @@ app.use("*", (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log(chalk.bgBlue(`Server starting on ${PORT}`))
+    console.log(chalk.bgBlue(`Server starting on ${PORT}`)) // eslint-disable-line no-console
 })

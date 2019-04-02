@@ -4,6 +4,7 @@
   "main": "server.js",
   "license": "MIT",
   "scripts": {
+    "lint":"eslint .",
     "start": "per-env",
     "start:development": "concurrently \"nodemon --ignore client/\" \"npm run client\"",
     "start:production": "node server.js",

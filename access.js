@@ -15,7 +15,7 @@ function retrieveToken(credentials){
     return axios.post(TOKEN_URL, credentials).then(result => {
         return Promise.resolve(result.data.message.split(" ")[1])
     }).catch(err => {
-        console.log(chalk.bgRed(err))
+        console.log(chalk.bgRed(err))  // eslint-disable-line no-console
         return Promise.reject(err)
     })
 }
@@ -32,7 +32,7 @@ function ensureToken(){
             token = t
             resolve(token)
         }).catch(err => {
-            console.log(chalk.bgRed(err))
+            console.log(chalk.bgRed(err)) // eslint-disable-line no-console
             reject(err)
         })
     })
