@@ -19,12 +19,14 @@
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "markdown": "^0.5.0",
-	"moment": "^2.22.2",
-	"per-env": "^1.0.2",
+    "moment": "^2.22.2",
+    "per-env": "^1.0.2",
     "react-materialize": "^2.6.0"
   },
   "devDependencies": {
     "concurrently": "^4.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.12.4",
     "nodemon": "^1.18.4"
   }
 }
