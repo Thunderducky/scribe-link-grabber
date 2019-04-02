@@ -30,7 +30,6 @@ app.get("/api/events", (req, res) => {
   const url = `${BASE_URL}/api/events`;
   access.get(url).then(
     result => { 
-		console.log(result.data);
 		return res.json(result.data.map(t => {
       		t.ts = moment(t.ts, "X").format("MM-DD-YY HH:mm:ss");
       		return t;
@@ -103,21 +102,22 @@ app.get("/api/activities", (req,res)=>{
 				obj.activityName = regexArr[2];
 				obj.ts = t.ts;
 				obj.link = t.links[0].url;
+				let mostRecentActivities = data[data.length-1].activites
 				//checks if theres any elements in activities if not pushes current activity
-				if(data[data.length-1].activites.length===0){
-					data[data.length-1].activites.push(obj)
+				if(mostRecentActivities.length===0){
+					mostRecentActivities.push(obj)
 				//if there IS an activity in the array it checks each element if it has the same name
 				}else{
 					//naming loop so I can reference to break later
-					acitivtyLoop:
-					for (let i = 0; i < data[data.length-1].activites.length; i++) {
-						const element = data[data.length-1].activites[i];
+					activityLoop:
+					for (let i = 0; i < mostRecentActivities.length; i++) {
+						const element = mostRecentActivities[i];
 						//if current element in the array is the same as the one we are working with it will break the loop
 						if(element.activityName===obj.activityName){
-							break acitivtyLoop;
+							break activityLoop;
 						//if it gets through the entire loop without breaking push activity we are working on into the array
-						}else if(i===(data[data.length-1].activites.length)-1){
-							data[data.length-1].activites.push(obj)
+						}else if(i===(mostRecentActivities.length)-1){
+							mostRecentActivities.push(obj)
 						}
 					}
 				}
