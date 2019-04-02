@@ -103,14 +103,30 @@ app.get("/api/activities", (req,res)=>{
 				obj.activityName = regexArr[2];
 				obj.ts = t.ts;
 				obj.link = t.links[0].url;
-				data[data.length-1].activites.push(obj)
+				//checks if theres any elements in activities if not pushes current activity
+				if(data[data.length-1].activites.length===0){
+					data[data.length-1].activites.push(obj)
+				//if there IS an activity in the array it checks each element if it has the same name
+				}else{
+					//naming loop so I can reference to break later
+					acitivtyLoop:
+					for (let i = 0; i < data[data.length-1].activites.length; i++) {
+						const element = data[data.length-1].activites[i];
+						//if current element in the array is the same as the one we are working with it will break the loop
+						if(element.activityName===obj.activityName){
+							break acitivtyLoop;
+						//if it gets through the entire loop without breaking push activity we are working on into the array
+						}else if(i===(data[data.length-1].activites.length)-1){
+							data[data.length-1].activites.push(obj)
+						}
+					}
+				}
 			}
 		})
     	res.json(data);
     }
   ).catch(
     (err) => {
-		console.log(err);
 		res.status(500).send(err)
 	}
   );
