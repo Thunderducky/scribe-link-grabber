@@ -93,9 +93,9 @@ app.get("/api/activities", (req,res)=>{
                     obj.link = t.links[0].url
                     obj.activites = []
                     data.push(obj)
-                }else if(data[data.length-1] && t.links.length > 0 && t.links[0].url.match(/https?:\/\/github.com\/the-coding-boot-camp-at-ut\/[\w-\d.]+\/blob\/master\/01-class-content\/([\w-\d]+)\/01-activities\/([\w-\d]+)\/readme\.md/gi)){
+                }else if(data[data.length-1] && t.links.length > 0 && t.links[0].url.match(/https?:\/\/github.com\/the-coding-boot-camp-at-ut\/[\w-\d.]+\/blob\/master\/01-class-content\/([\w-\d]+)\/01-activities\/([\w-\d]+)\/[\w-\d/]*(readme\.md)$/gi)){
                     obj.tsOnPanopto = +(moment(t.ts,"X")).diff(moment(data[data.length-1].ts,"X"),"seconds")
-                    const regex = /https?:\/\/github.com\/the-coding-boot-camp-at-ut\/[\w-\d.]+\/blob\/master\/01-class-content\/([\w-\d]+)\/01-activities\/([\w-\d]+)\/readme\.md/gi
+                    const regex = /https?:\/\/github.com\/the-coding-boot-camp-at-ut\/[\w-\d.]+\/blob\/master\/01-class-content\/([\w-\d]+)\/01-activities\/([\w-\d]+)\/[\w-\d/]*(readme\.md)$/gi
                     let regexArr = regex.exec(t.links[0].url)
                     obj.unit = regexArr[1]
                     obj.activityName = regexArr[2]
